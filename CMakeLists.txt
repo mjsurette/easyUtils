@@ -12,7 +12,6 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 
 include_directories(include)
-include_directories(subprojects/Catch2/single_include/catch2)
 
 find_package(Threads)
 
@@ -20,7 +19,8 @@ option (BUILD_TESTS "Build test programs" OFF)
 
 add_subdirectory(src)
 
-if (${BUILD_TESTS} OR x${CMAKE_BUILD_TYPE} STREQUAL "xDebug")
+if (${BUILD_TESTS})
+    include_directories(subprojects/Catch2/single_include/catch2)
     add_subdirectory(test)
     add_subdirectory(demo)
-endif (${BUILD_TESTS} OR x${CMAKE_BUILD_TYPE} STREQUAL "xDebug")
+endif (${BUILD_TESTS})

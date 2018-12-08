@@ -6,7 +6,6 @@ project('easyUtils','cpp'
     ]
 )
 
-Catch2Inc = include_directories('subprojects/Catch2/single_include/catch2')
 easyUtilsInc= include_directories('include')
 
 threadDep = dependency('threads')
@@ -14,6 +13,7 @@ threadDep = dependency('threads')
 subdir('src')
 
 if get_option('build_tests')
+    Catch2Inc = include_directories('subprojects/Catch2/single_include/catch2')
     subdir('test')
     subdir('demo')
 endif
