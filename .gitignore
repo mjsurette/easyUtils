@@ -1,0 +1,11 @@
+build*
+*~
+.*
+!.gitignore
+*.o
+*.db
+tmp*
+extern
+*.project
+*.workspace
+*.user

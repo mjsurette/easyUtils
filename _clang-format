@@ -1,0 +1,10 @@
+BasedOnStyle: WebKit
+BreakBeforeBraces: Allman
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortBlocksOnASingleLine: true
+AllowShortFunctionsOnASingleLine: InlineOnly
+AlwaysBreakBeforeMultilineStrings: true
+IncludeBlocks: Preserve
+IndentCaseLabels: false
+PointerAlignment: Right
+ColumnLimit: 80
