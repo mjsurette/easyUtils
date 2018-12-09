@@ -11,6 +11,7 @@ int main(int argc, char const *argv[])
     {
         auto fileName = argv[i];
         auto fileText = ReadFileAsUTF8(fileName);
+        cerr << fileName << '\t' << fileText.lineCount() << endl;
         cout << fileText.data() << endl;
     }
 }

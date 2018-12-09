@@ -104,6 +104,11 @@ public:
         return _data.size();
     };
 
+    auto lineCount() const noexcept
+    {
+        return _lineCount;
+    };
+
     iterator begin() noexcept
     {
         iterator rv(*this);
@@ -120,6 +125,7 @@ public:
 
 private:
     std::string _data;
+    size_t _lineCount;
 
     void readUTF8(std::ifstream &ifs, UTFness fileType);
     void readUTF16(std::ifstream &ifs, UTFness fileType);

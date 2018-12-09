@@ -12,6 +12,7 @@ using namespace std;
 constexpr int BUFSIZE = 1024;
 
 ReadFileAsUTF8::ReadFileAsUTF8(std::string const &fileName)
+    : _lineCount(0)
 {
     ifstream ifs;
     ifs.exceptions(ifstream::badbit);
@@ -20,11 +21,32 @@ ReadFileAsUTF8::ReadFileAsUTF8(std::string const &fileName)
     string buffer(BUFSIZE, '\0');
     ifs.read(buffer.data(), BUFSIZE);
 
-    auto fileType = utfNess(string_view(buffer.data(), static_cast<unsigned>(ifs.gcount())));
+    auto fileType = utfNess(
+        string_view(buffer.data(), static_cast<unsigned>(ifs.gcount())));
     if (fileType == UTFness::UTF8wBOM || fileType == UTFness::UTF8)
         readUTF8(ifs, fileType);
     else
         readUTF16(ifs, fileType);
+
+    string_view svLines(_data);
+    while (svLines.size() > 0)
+    {
+        ++_lineCount;
+        auto pos = svLines.find_first_of("\r\n");
+        if (pos == svLines.npos)
+        {
+            svLines = string_view();
+        }
+        else
+        {
+            if (svLines[pos] == '\r' && svLines.size() > pos
+                && svLines[pos + 1] == '\n')
+            {
+                ++pos;
+            }
+            svLines = svLines.substr(pos + 1);
+        }
+    }
 }
 
 //==============================================================================
@@ -111,8 +133,7 @@ void ReadFileAsUTF8::iterator::nextLine() noexcept
         else
         {
             auto lpos = last + 1;
-            if (_data[last] == '\r'
-                && last < (_data.size() - 1)
+            if (_data[last] == '\r' && last < (_data.size() - 1)
                 && _data[last + 1] == '\n')
                 ++lpos;
             _ixNextLine = lpos;
