@@ -12,3 +12,10 @@ executable('textMapTest',textMapTestFiles
     ,dependencies:easyUtilsDep
     ,include_directories:Catch2Inc
 )
+
+uuencodeTestFiles= ['test-main.cpp']
+uuencodeTestFiles+= ['uuencodeTest.cpp']
+executable('uuencodeTest',uuencodeTestFiles
+    ,dependencies:easyUtilsDep
+    ,include_directories:Catch2Inc
+)

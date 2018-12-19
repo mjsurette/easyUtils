@@ -28,6 +28,8 @@ ReadFileAsUTF8::ReadFileAsUTF8(std::string const &fileName)
     else
         readUTF16(ifs, fileType);
 
+    ifs.close();
+
     string_view svLines(_data);
     while (svLines.size() > 0)
     {
