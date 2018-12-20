@@ -8,6 +8,10 @@ list(APPEND readFileFiles readFile.cpp)
 add_executable(readFile ${readFileFiles})
 target_link_libraries(readFile easyUtils)
 
+list(APPEND standardPathsFiles standardPaths.cpp)
+add_executable(standardPaths ${standardPathsFiles})
+target_link_libraries(standardPaths easyUtils)
+
 list(APPEND readFileByLineFiles readFileByLine.cpp)
 add_executable(readFileByLine ${readFileByLineFiles})
 target_link_libraries(readFileByLine easyUtils)
