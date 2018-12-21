@@ -4,6 +4,7 @@
 //  http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=iws-appendixa
 
 #include <stdexcept>
+#include <string>
 using namespace std;
 
 namespace easyUtils
@@ -50,7 +51,8 @@ std::tuple<CodePoint, unsigned> le2cp(std::string_view svIn)
     }
     else
     {
-        throw std::domain_error("invalid input to utf16_2cp "s + to_string(svIn.size()));
+        throw std::domain_error(
+            "invalid input to utf16_2cp "s + to_string(svIn.size()));
     }
 }
 
