@@ -8,6 +8,13 @@ They should work on all platforms, but only tested on Linux.
 
 My design philosophy is to stay away from sharp edges. Some things that are IMHO overused are templates, pointers, and threads. As Sean Parent would say, my goal is to have none of these. Still sometimes it's best to dive into the deep end.
 
+====
+
+readFileAsUTF8 does what it says. It reads a file into std::string buffer. You can then access it as a whole or line-by-line using iterators.
+
+====
+
+standardPaths is a (hopefully) cross platform set of functions which return paths to common Folders.
 
 ====
 
@@ -41,10 +48,23 @@ nQueens in the demo folder is a brute force nQueens problem solution finder usin
 
 ====
 
+utfConnvert is a pair of functions to mechanically convert a little endian stream of bytes to an 8-bit stream of bytes.
+Very little checking is done for valid code points. Use this only for trusted streams.
+
+====
+
 utfNess will detect if a file is UTF-16 LE, UTF-16 BE, or UTF-8.
 readFileAsUTF8 will read an entire 8 bit or 16 bit encoded file into an 8 bit string, transfoming UTF-16 to UTF-8.
 The conversion is mechanical. Other libraries provide more robust solutions, but this works well in all my tests and
 is compact and fast.
+
+====
+
+uuencode provides basic functions to uuencode binary strings in 45 byte chunks and uudecode strings back into binary in 60 byte chunks.
+
+====
+
+The UUID class provides a uuid. Standard uuid's come in different classes. This doesn't follow any of these. This one provides a timestamp part and a random part, which is actually a mix of class 1 and class 4.
 
 ====
 

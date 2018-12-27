@@ -19,3 +19,7 @@ target_link_libraries(readFileByLine easyUtils)
 list(APPEND utfNessFiles utfNess.cpp)
 add_executable(utfNess ${utfNessFiles})
 target_link_libraries(utfNess easyUtils)
+
+list(APPEND uuidFiles uuid.cpp)
+add_executable(uuid ${uuidFiles})
+target_link_libraries(uuid easyUtils)

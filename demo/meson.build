@@ -23,3 +23,8 @@ utfNessFiles= ['utfNess.cpp']
 executable('utfNess',utfNessFiles
     ,dependencies:easyUtilsDep
 )
+
+uuidFiles= ['uuid.cpp']
+executable('uuid',uuidFiles
+    ,dependencies:easyUtilsDep
+)

@@ -8,10 +8,11 @@ easyUtilsSrc+= ['threadPool.cpp']
 easyUtilsSrc+= ['utfConvert.cpp']
 easyUtilsSrc+= ['utfNess.cpp']
 easyUtilsSrc+= ['uuencode.cpp']
+easyUtilsSrc+= ['uuid.cpp']
 
 easyUtilsLib= library('easyUtils',easyUtilsSrc
     ,dependencies:filesystemLib
-    ,include_directories:easyUtilsInc)
+    ,include_directories:[easyUtilsInc,dateInc])
 
 easyUtilsDep= declare_dependency(
     link_with:easyUtilsLib,

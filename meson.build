@@ -7,6 +7,7 @@ project('easyUtils','cpp'
 )
 
 easyUtilsInc= include_directories('include')
+dateInc= include_directories('subprojects/date/include/date')
 
 threadDep = dependency('threads')
 
