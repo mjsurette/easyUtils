@@ -12,8 +12,8 @@ std::filesystem::path myHome()
 {
 #ifdef _WIN32
     string path(getenv("USERPROFILE"));
-    for (auto &ch : path)
-        if (ch == '\\')
+    for(auto &ch : path)
+        if(ch == '\\')
             ch = '/';
     return std::filesystem::path(path);
 #else

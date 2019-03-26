@@ -8,7 +8,8 @@ using namespace easyUtils;
 using namespace std;
 
 //==============================================================================
-constexpr TextMap tm{ "one", "two", "three" };
+constexpr TextMap tm { "one", "two", "three" };
+
 constexpr auto operator"" _tmap(const char *val, long unsigned int)
 {
     return tm.textMap(val);
@@ -35,11 +36,11 @@ TEST_CASE("user literal test")
 //==============================================================================
 TEST_CASE("switch test")
 {
-    for (auto &cv : { "one", "two", "three", "four" })
+    for(auto cv : { "one", "two", "three", "four" })
     {
         auto v = tm.textMap(cv);
 
-        switch (v)
+        switch(v)
         {
         case tm.textMap("one"):
             REQUIRE(v == 0);
@@ -61,7 +62,7 @@ TEST_CASE("find duplicates")
 {
     REQUIRE(tm.findDups().size() == 0);
 
-    TextMap tm2{ "one", "two", "three", "two" };
+    TextMap tm2 { "one", "two", "three", "two" };
     REQUIRE(tm2.findDups().size() == 1);
 
     auto it = tm2.findDups().begin();
@@ -81,11 +82,11 @@ constexpr auto operator"" _tmap(const char *val, long unsigned int)
 */
 TEST_CASE("switch & user literal test")
 {
-    for (auto &cv : { "one", "two", "three", "four" })
+    for(auto cv : { "one", "two", "three", "four" })
     {
         auto v = tm.textMap(cv);
 
-        switch (v)
+        switch(v)
         {
         case "one"_tmap:
             REQUIRE(v == 0);

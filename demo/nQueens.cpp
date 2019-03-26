@@ -13,68 +13,32 @@
     would be represented by the vector { 5,3,6,0,7,1,4,2 }
 */
 
+#include "../test/nQueenSupport.h"
 #include "threadPool.h"
+// extern std::atomic<int> solutionCount; in nQueenSupport.h
 
 #include <atomic>
 #include <iostream>
+#include <string>
 #include <vector>
 using namespace std;
 
-constexpr unsigned QUEENcount = 14;
-
-atomic<int> solutionCount = 0;
+constexpr unsigned QUEENcount = 14; // default number of queens
 
 //==============================================================================
-bool queensCollide(std::vector<unsigned> const &board)
+int main(int argc, char **argv)
 {
-    if (board.size() < 2)
-        return false;
-    unsigned newRow = board.size() - 1;
-    for (unsigned row = 0; row < newRow; ++row)
-    {
-        // columns
-        if (board[row] == board[newRow])
-            return true;
-        // diagonals
-        unsigned diffX = newRow - row;
+    unsigned noQueens = argc > 1 ? stoul(string(argv[1])) : 0;
+    noQueens = noQueens == 0 ? QUEENcount : noQueens;
 
-        unsigned v1 = board[row], v2 = board[newRow];
-        unsigned diffY = v1 > v2 ? v1 - v2 : v2 - v1;
-
-        if (diffX == diffY)
-            return true;
-    }
-    return false;
-}
-
-//==============================================================================
-void solveQueens(std::vector<unsigned> board)
-{
-    for (unsigned newPos = 0; newPos < QUEENcount; ++newPos)
-    {
-        auto newBoard = board;
-        newBoard.push_back(newPos);
-        if (!queensCollide(newBoard))
-        {
-            if (newBoard.size() == QUEENcount)
-                ++solutionCount;
-            else
-                solveQueens(newBoard);
-        }
-    }
-}
-
-//==============================================================================
-int main()
-{
-    cout << "nQueens" << endl;
+    cout << "nQueens " << noQueens << endl;
     easyUtils::ThreadPool tp;
-    for (unsigned i = 0; i < QUEENcount; ++i)
+    for(unsigned i { 0 }; i < noQueens; ++i)
     {
         std::vector<unsigned> board;
-        board.reserve(QUEENcount);
+        board.reserve(noQueens);
         board.push_back(i);
-        tp.addJob([=]() { solveQueens(std::move(board)); });
+        tp.addJob([=]() { solveQueens(std::move(board), noQueens); });
     }
     tp();
     tp.finish();

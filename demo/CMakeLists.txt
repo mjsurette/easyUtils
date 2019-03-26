@@ -1,4 +1,5 @@
 
+list(APPEND nQueensFiles ../test/nQueenSupport.cpp)
 list(APPEND nQueensFiles nQueens.cpp)
 add_executable(nQueens ${nQueensFiles})
 target_link_libraries(nQueens easyUtils)

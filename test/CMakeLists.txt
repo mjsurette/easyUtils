@@ -1,6 +1,7 @@
 
 list(APPEND eightQueensFiles test-main.cpp)
 list(APPEND eightQueensFiles eightQueens.cpp)
+list(APPEND eightQueensFiles nQueenSupport.cpp)
 add_executable(eightQueens ${eightQueensFiles})
 target_link_libraries(eightQueens easyUtils)
 target_link_libraries(eightQueens Threads::Threads)

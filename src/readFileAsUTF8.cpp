@@ -9,7 +9,7 @@ namespace easyUtils
 using namespace std;
 
 //==============================================================================
-constexpr int BUFSIZE = 1024;
+constexpr int BUFSIZE { 1024 };
 
 ReadFileAsUTF8::ReadFileAsUTF8(std::string const &fileName)
     : _lineCount(0)
@@ -23,7 +23,7 @@ ReadFileAsUTF8::ReadFileAsUTF8(std::string const &fileName)
 
     auto fileType = utfNess(
         string_view(buffer.data(), static_cast<unsigned>(ifs.gcount())));
-    if (fileType == UTFness::UTF8wBOM || fileType == UTFness::UTF8)
+    if(fileType == UTFness::UTF8wBOM || fileType == UTFness::UTF8)
         readUTF8(ifs, fileType);
     else
         readUTF16(ifs, fileType);
@@ -31,17 +31,17 @@ ReadFileAsUTF8::ReadFileAsUTF8(std::string const &fileName)
     ifs.close();
 
     string_view svLines(_data);
-    while (svLines.size() > 0)
+    while(svLines.size() > 0)
     {
         ++_lineCount;
         auto pos = svLines.find_first_of("\r\n");
-        if (pos == svLines.npos)
+        if(pos == svLines.npos)
         {
             svLines = string_view();
         }
         else
         {
-            if (svLines[pos] == '\r' && svLines.size() > pos
+            if(svLines[pos] == '\r' && svLines.size() > pos
                 && svLines[pos + 1] == '\n')
             {
                 ++pos;
@@ -57,7 +57,7 @@ void ReadFileAsUTF8::readUTF8(std::ifstream &ifs, UTFness fileType)
     ifs.seekg(0, ifs.end);
     auto length = ifs.tellg();
 
-    if (fileType == UTFness::UTF8wBOM)
+    if(fileType == UTFness::UTF8wBOM)
     {
         ifs.seekg(3, ifs.beg);
         length -= 3;
@@ -77,7 +77,7 @@ void ReadFileAsUTF8::readUTF16(std::ifstream &ifs, UTFness fileType)
     auto length = ifs.tellg();
     _data.reserve(length);
 
-    if (fileType == UTFness::LEwBOM || fileType == UTFness::BEwBOM)
+    if(fileType == UTFness::LEwBOM || fileType == UTFness::BEwBOM)
     {
         ifs.seekg(2, ifs.beg);
         length -= 2;
@@ -90,17 +90,17 @@ void ReadFileAsUTF8::readUTF16(std::ifstream &ifs, UTFness fileType)
     string inData;
     string_view sv;
 
-    while (!ifs.eof() || sv.size() > 0)
+    while(!ifs.eof() || sv.size() > 0)
     {
-        if (sv.size() < 2 && !ifs.eof())
+        if(sv.size() < 2 && !ifs.eof())
         {
             string tmp(sv);
             string buffer(BUFSIZE, '\0');
             ifs.read(buffer.data(), BUFSIZE);
             buffer.resize(ifs.gcount());
 
-            if (fileType == UTFness::BEwBOM || fileType == UTFness::BE)
-                for (size_t i = 0; i < buffer.size(); i += 2)
+            if(fileType == UTFness::BEwBOM || fileType == UTFness::BE)
+                for(size_t i { 0 }; i < buffer.size(); i += 2)
                     std::swap(buffer[i], buffer[i + 1]);
 
             inData = tmp + buffer;
@@ -120,7 +120,7 @@ void ReadFileAsUTF8::readUTF16(std::ifstream &ifs, UTFness fileType)
 void ReadFileAsUTF8::iterator::nextLine() noexcept
 {
     constexpr string_view terminator("\r\n");
-    if (_ixNextLine > _data.size())
+    if(_ixNextLine > _data.size())
     {
         lastLine();
     }
@@ -128,14 +128,14 @@ void ReadFileAsUTF8::iterator::nextLine() noexcept
     {
         auto first = _ixNextLine;
         auto last = _data.find_first_of(terminator, _ixNextLine);
-        if (last == string_view::npos)
+        if(last == string_view::npos)
         {
             lastLine();
         }
         else
         {
             auto lpos = last + 1;
-            if (_data[last] == '\r' && last < (_data.size() - 1)
+            if(_data[last] == '\r' && last < (_data.size() - 1)
                 && _data[last + 1] == '\n')
                 ++lpos;
             _ixNextLine = lpos;

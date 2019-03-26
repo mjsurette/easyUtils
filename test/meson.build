@@ -1,6 +1,7 @@
 
 eightQueensFiles= ['test-main.cpp']
 eightQueensFiles+= ['eightQueens.cpp']
+eightQueensFiles+= ['nQueenSupport.cpp']
 executable('eightQueens',eightQueensFiles
     ,dependencies:[easyUtilsDep,threadDep]
     ,include_directories:Catch2Inc

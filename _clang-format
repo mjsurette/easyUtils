@@ -7,4 +7,6 @@ AlwaysBreakBeforeMultilineStrings: true
 IncludeBlocks: Preserve
 IndentCaseLabels: false
 PointerAlignment: Right
+SpaceBeforeParens: Never
+Standard: C++11
 ColumnLimit: 80

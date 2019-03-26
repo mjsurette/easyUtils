@@ -1,5 +1,6 @@
 
 nQueensFiles= ['nQueens.cpp']
+nQueensFiles+= ['../test/nQueenSupport.cpp']
 executable('nQueens',nQueensFiles
     ,dependencies:[easyUtilsDep,threadDep]
 )
@@ -26,5 +27,10 @@ executable('utfNess',utfNessFiles
 
 uuidFiles= ['uuid.cpp']
 executable('uuid',uuidFiles
+    ,dependencies:easyUtilsDep
+)
+
+textMapFiles= ['textMapTest.cpp']
+executable('textMapTest',textMapFiles
     ,dependencies:easyUtilsDep
 )
