@@ -7,6 +7,7 @@
 
 namespace easyUtils
 {
+//==============================================================================
 /*
 *! throws std::ios_base::failure on error when opening or reading a file
 *! throws domain error with odd # of bytes on UTF-16 file

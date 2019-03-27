@@ -12,6 +12,7 @@ namespace easyUtils
 {
 using TASK = std::function<void()>;
 
+//==============================================================================
 class ThreadPool
 {
 public: // standard constructors

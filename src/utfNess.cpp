@@ -3,6 +3,7 @@
 
 namespace easyUtils
 {
+//==============================================================================
 UTFness utfNess(std::string_view buffer) noexcept
 {
     if (buffer.size() < 2)
